@@ -1,35 +1,43 @@
-def calc_min_gols_to_win(g11, g12, g21, g22, is_first_game_in_home_game1: bool) -> int:
+def calc_min_pass_btn(m_tabs: list[int]) -> int:
 	'''
-	:param command_first_gols: Голы первый команды
-	:param command_second_gols: Голы второй
-	:param is_first_game_in_home_game1: 1 команда играла дома первую игру
-	:return: Минимальное кол-во голов, чтобы победу одержала 1 команда
+	:param m_tabs: Кол-во пробелов в i строке
+	:return: Кол-во нажатий клавиш
 	'''
-	all_gols_first_command: int = g11 + g21
-	all_gols_second_command: int = g12 + g22
-	if all_gols_first_command > all_gols_second_command:
-		return 0
 
-	delta_gols: int = all_gols_second_command - all_gols_first_command
-	if is_first_game_in_home_game1:
-		if g12 + delta_gols <= g21:
-			return delta_gols + 1
-		return delta_gols
-	if g11 <= g22:
-		return delta_gols + 1
-	return delta_gols
+	def calc_min_pass_btn_in_line(m_tab: int) -> int:
+		'''
+		Space -> +1
+		Tab -> +4
+		Backspace -> -1
+		'''
+		result = m_tab // 4
+		result += min(m_tab % 4, 2)
+		return result
+
+	cache = dict()
+	result = 0
+	for m_tab in m_tabs:
+		if m_tab not in cache:
+			cache[m_tab] = calc_min_pass_btn_in_line(m_tab)
+		result += cache[m_tab]
+	return result
+
+
 
 
 def run_tests():
-	pass
+	assert calc_min_pass_btn([
+		1, 4, 12, 9, 0
+	]) == 8, calc_min_pass_btn([
+		1, 4, 12, 9, 0
+	])
 
 
 if __name__ == '__main__':
 	is_debug = False
 	if is_debug:
 		run_tests()
-	g11, g12 = list(map(int, input().split(':')))
-	g21, g22 = list(map(int, input().split(':')))
-	is_first_game_in_home_game1: bool = input() == '1'
-	result = calc_min_gols_to_win(g11, g12, g21, g22, is_first_game_in_home_game1)
+	n: int = int(input())
+	m_tabs: list[int] = [int(input()) for _ in range(n)]
+	result = calc_min_pass_btn(m_tabs=m_tabs)
 	print(result)

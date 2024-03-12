@@ -1,7 +1,3 @@
-FIBS = [0, 1]
-CASH_MAX_VALUES = dict()
-
-
 def get_min_time(L, x1, v1, x2, v2) -> int:
 	'''
 	:param L: Длина окружности
@@ -15,22 +11,11 @@ def get_min_time(L, x1, v1, x2, v2) -> int:
 	def get_min_time_coincided():
 		if v1 - v2 == 0:
 			return -1
-		if x1 == x2:
-			return 0
 		f = lambda n: ((x1 - x2) + n * L) / (v2 - v1)
-		n = (v2-v1)//((x1-x2)*L)
-		result = None
-		min_f = None
-		for i in range(n-1, n+1):
-			res_f = f(i)
-			if min_f is None and res_f >= 0:
-				result = i
-				min_f = res_f
-			else:
-				if f(i) < min_f:
-					min_f = f(i)
-					result = i
-		return result
+		vars = list(filter(lambda x: x != -1 and x >= 0, list(f(x) for x in range(-10000, 10000))))
+		if vars:
+			return min(vars)
+		return -1
 
 	def get_min_time_opposite():
 		'''
@@ -40,23 +25,14 @@ def get_min_time(L, x1, v1, x2, v2) -> int:
 		'''
 		if v1 + v2 == 0:
 			return -1
-		if x1 + x2 == 0:
-			return 0
 		f = lambda n :(-(x1 + x2) + n * L) / (v1 + v2)
-		n = ((v2 + v1) + (x1 + x2)) // L
-		result = None
-		min_f = None
-		for i in range(n - 3, n + 3):
-			res_f = f(i)
-			if min_f is None and res_f >= 0:
-				result = i
-				min_f = res_f
-			else:
-				if res_f < min_f:
-					min_f = f(i)
-					result = i
-		return result
+		vars = list(filter(lambda x: x != -1 and x >= 0, list(f(x) for x in range(-10000, 10000))))
+		if vars:
+			return min(vars)
+		return -1
 
+	if x1 == x2:
+		return 0
 	res_1 = get_min_time_coincided()
 	res_2 = get_min_time_opposite()
 	if res_1 == -1:
@@ -64,6 +40,8 @@ def get_min_time(L, x1, v1, x2, v2) -> int:
 	if res_2 == -1:
 		return res_1
 	return min(res_1, res_2)
+
+
 def run_tests():
 	pass
 
@@ -74,4 +52,8 @@ if __name__ == '__main__':
 		run_tests()
 	L, x1, v1, x2, v2 = list(map(int, input().split()))
 	res = get_min_time(L, x1, v1, x2, v2)
-	print(res)
+	if res == -1:
+		print('NO')
+	else:
+		print('YES')
+		print(res)

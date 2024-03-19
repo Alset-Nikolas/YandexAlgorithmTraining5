@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href='https://contest.yandex.ru/contest/59540/problems/G/'>G. Ни больше ни меньше</a>
+    <a href='https://contest.yandex.ru/contest/59540/problems/H/'>H. Наилучший запрет</a>
 </h1>
 
 

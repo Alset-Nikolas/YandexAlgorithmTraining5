@@ -1,0 +1,24 @@
+"First team" - "Second team" 3:4
+Player A 87'
+Player B 88'
+Player A 89'
+Player AA 10'
+Player CC 20'
+Player CC 77'
+Player CC 90'
+Goals on last 1 minutes by Player A
+Goals on last 2 minutes by Player A
+Goals on last 3 minutes by Player A
+Goals on last 4 minutes by Player A
+Goals on last 5 minutes by Player A
+Goals on last 55 minutes by Player Z
+Score opens by "First team"
+Score opens by "Second team"
+Score opens by First team
+Score opens by Second team
+Score opens by Player A
+Score opens by Player B
+Score opens by Player C
+Score opens by Player AA
+Score opens by Player BB
+Score opens by Player CC
